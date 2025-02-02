@@ -1,0 +1,60 @@
+********CODE IN JAVA*******
+
+public class RemoveDuplicatesSortedArray {
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length <= 2) return nums.length; // Already valid
+        
+        int j = 2; // Start from the third position
+        
+        for (int i = 2; i < nums.length; i++) {
+            if (nums[i] != nums[j - 2]) { // Allow at most 2 occurrences
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        
+        return j; // New length
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 5};
+        int k = removeDuplicates(nums);
+
+        System.out.println("New length: " + k);
+        System.out.print("Modified Array: ");
+        for (int i = 0; i < k; i++) {
+            System.out.print(nums[i] + " ");
+        }
+    }
+}
+
+
+
+
+***************EXPLANATION*****************************
+
+
+Approach: Two Pointer Technique
+We use a two-pointer approach:
+
+Pointer j (slow pointer): It tracks the position where the next valid element should be placed.
+
+Pointer i (fast pointer): It iterates through the array checking for valid elements.
+
+Key Logic
+1.The first two elements of the sorted array are always valid.
+
+2.Starting from i = 2, check if nums[i] is not equal to nums[j - 2].
+
+3.If true, copy nums[i] to nums[j] and increment j.
+
+4.Otherwise, skip nums[i] (as it appears more than twice).
+
+5.The function returns j, which is the new length of the modified array.
+
+Key Notes
+In-Place Modification: The function modifies the original nums array and does not use extra space (O(1) space complexity).
+Preserving Relative Order: Since the array is sorted, the order is naturally maintained.
+Allowing At Most Two Occurrences: We ensure no number appears more than twice.
+Time Complexity: O(n) – We iterate through the array once.
+Space Complexity: O(1) – We use only two pointers (i and j), no extra data structures.
